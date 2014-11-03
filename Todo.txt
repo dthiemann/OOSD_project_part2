@@ -5,4 +5,4 @@ Joe - KeyStorage & ValueStorage
 Dylan - LinearFileDatabase
 Jason - DiskSpace, set up Unit Tests
 
-4 files - one for bit array, one for keys, one for identifiers 
+3 files - one for two bit arrays (Allocate & Checkpoint), one for key/value, one for identifiers 
