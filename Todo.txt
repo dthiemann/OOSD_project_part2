@@ -1,9 +1,9 @@
 To do for team #1 for OOSD project part 2
 
-Tim - Checkpoint & Allocation
-Joe - KeyStorage & ValueStorage
-Dylan - LinearFileDatabase
-Jason - DiskSpace, set up Unit Tests
+Tim - Checkpoint.java & Allocation.java
+Joe - KeyStorage.java & ValueStorage.java (name may change)
+Dylan - LinearFileDatabase.java
+Jason - DiskSpace.java - also setting up UnitTests
 
 3 files - one for two bit arrays (Allocate & Checkpoint), one for key/value, one for identifiers
 We have decided to remove the Node class (for now) for our LinearFileDatabase.java class. We discussed and discovered a (potentially) better way to implement it.
