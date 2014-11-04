@@ -9,3 +9,8 @@ Jason - DiskSpace, set up Unit Tests
 We have decided to remove the Node class (for now) for our LinearFileDatabase.java class. We discussed and discovered a (potentially) better way to implement it.
 
 DiskSpace will take in an extra parameter, fileName because we will be using 2 separate files for Keys and Identifiers 
+
+11/4 Comment by Ted Herman -
+ Each person should also have the names of the classes (or Java programs) 
+they will be doing.  Also for Dylan: please "git add .project" and commit
+so that the repository can be imported by Eclipse.
