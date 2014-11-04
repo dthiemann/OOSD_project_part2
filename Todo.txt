@@ -14,3 +14,7 @@ DiskSpace will take in an extra parameter, fileName because we will be using 2 s
  Each person should also have the names of the classes (or Java programs) 
 they will be doing.  Also for Dylan: please "git add .project" and commit
 so that the repository can be imported by Eclipse.
+
+Comment by Dylan -
+	Added names of the classes. the .project file was already in the
+repo. it was within the OOSD_project_part2 folder.
