@@ -23,7 +23,7 @@ public class LinearFileDatabase implements Database {
 	@Override
 	public void store(byte[] key, String id) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 }
