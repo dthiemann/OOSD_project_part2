@@ -5,14 +5,15 @@ public class IdStorage implements FileStorage {
 	
 	// Get the Identifiers from a given Field
 	// -- takes an index integer pointing to location on file
-	public <E> byte[] get( E n ){
+	public byte[] get( int index ){
 		// DO SOMETHING
-		int index = ( Integer ) n;
 		return null;
 	}
 	
 	// Save an Identifier to the file
-	// Unless Identifier already exists
+	// Requires getting all Identifiers,
+	//   appending new ID to list, then
+	//   re-converting to byte[], splitting into 1k blocks, and writing to file
 	public void put( byte[] f ){
 		// DO SOMETHING
 	}
@@ -20,5 +21,10 @@ public class IdStorage implements FileStorage {
 	// Delete an Identifier from the file
 	public void del( byte[] f ){
 		// DO SOMETHING
+	}
+	
+	private byte[] rebuild( int index ){
+		// DO SOMETHING
+		return null;
 	}
 }

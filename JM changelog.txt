@@ -1,5 +1,29 @@
 Joe Maule ChangeLog
 
+Update (11/8):
++ Created a Kblock class:
+	- used internally for Field- and Id-Storage classes
+	  to handle the 1 kb byte arrays for reading/writing files
+	- coded: constructors, get() methods for:
+		pointer, 
+		data (field or id), 
+		block of data (1kb total) to write to a file
+	  	  
++ FieldStorage class:
+	- coded: getPointer, getIndex, put, and del methods
+	- needs method names from Allocate and DiskSpace
+	
++ ToDo:
+	- fix all commenting
+	- testing of methods
+	- IdStorage class
+	- evaluate Node and FieldSearch classes for rewrites
+	- research FileStorage interface for greater utility
+
+---------------
+
+Created (11/7):
+
 Commentary: 
 Sorry for the delay. I've been fighting with Git.
 I had a bit coded in, but I scrapped most of it because I found
