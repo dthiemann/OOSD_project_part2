@@ -1,0 +1,35 @@
+Joe Maule ChangeLog
+
+Commentary: 
+Sorry for the delay. I've been fighting with Git.
+I had a bit coded in, but I scrapped most of it because I found
+a bunch of stuff that I needed to change and found some shortcuts.
+Still a lot of implementation code to do, but I've got some
+basic structure & comments in files.
+
++ To keep with preventing confusion, I made my classes
+	FieldStorage and IdStorage, since that's what they're storing.
++ I'm still trying to figure out how I can/want to set up the byte arrays
+	that are going to be read/written to files.
++ As discussed in class on Thurs, I'll probably have to implement 'size' 
+	into the byte[]'s - left-padding with 0's might not actually work. 
+++ I might end up using the Node class, but with how we're planning on implementing
+	our database, I'm not foreseeing any need for it within your guys' classes, so
+	I'll probably be heavily modifying it for my own uses.
+
+Classes created:
+1. FileStorage  -- Interface for Field- and Id-Storage
+2. FieldStorage -- for writing Fields to a file
+3. IdStorage    -- for writing Identifiers to a file
+
+Notes:
+1. Code is not completely implemented in this iteration, obviously
+2. Using place-holder method names for DiskSpace and Allocate,
+	will update as the names are finalized
+3. I may need a size() method in ALLOCATE for the Field bit array -
+	because of how we're storing our data, we'll need a way to iterate through
+	the Field file (unless we just read until EndOfFile?)
+4. We may need to edit the FieldSearch class as well, since it currently is using
+	the Node class
+
+	
