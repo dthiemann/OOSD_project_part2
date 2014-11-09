@@ -12,7 +12,6 @@ public class DiskSpace {
 		file.close();
     }
   
-<<<<<<< HEAD
 	public byte[] ReadArea(int area, String FileName) throws IOException {
 		RandomAccessFile file = new RandomAccessFile(FileName, "r");
 		file.seek(area);
@@ -20,14 +19,7 @@ public class DiskSpace {
 		file.read(bytes);
 		file.close();
 		return bytes;
-=======
-  public void WriteArea(int area, byte[] data, String filename) {	//area# is a place holder for now
-	  
-    }
-  
-  public byte[] ReadArea(int area, String filename) {	//area# is a place holder for now
-	  return null; 	// Just a place holder for now
->>>>>>> 8c0ee46c7982caf8b81b83ae074288623f4c629b
+
   	}
 //Where exactly will it write this file? Will it be able to find it once it is written?
 //Maybe add 3rd method to see what file name I am using from keystorage/idstorage 
