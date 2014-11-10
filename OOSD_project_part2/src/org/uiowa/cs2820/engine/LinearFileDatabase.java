@@ -17,7 +17,10 @@ public class LinearFileDatabase implements Database {
 		 * Need to access the files using a byte array. 
 		 */
 		
-		return null;
+		int my_pointer = f_storage.getPointer(key);
+		Node my_node =  (Node) Field.revert(f_storage.get(my_pointer));
+		
+		return my_node;
 	}
 
 	@Override
@@ -38,6 +41,7 @@ public class LinearFileDatabase implements Database {
 		
 		// this is wrong and needs to be changed
 		Kblock myNode = new Kblock(key);
+		
 		
 	}
 
