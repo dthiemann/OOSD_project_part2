@@ -1,5 +1,17 @@
 Joe Maule ChangeLog
 
+Update (11/10):
++ Kblock class:
+	- Fixed byte[] size to 1024 (I had it set to 1000 for some reason)
+
++ FieldStorage class:
+	- Fixed getIndex() to also take a byte[] instead of Field
+	
++ Removed del() method from Field-, Id-, and File-Storage
+  as it is not required for this part of the Project
+	
+---------------
+
 Update (11/9):
 + Kblock class:
 	- Did some testing with ByteBuffers
