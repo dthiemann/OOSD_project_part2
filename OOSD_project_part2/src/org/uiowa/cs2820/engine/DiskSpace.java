@@ -5,14 +5,14 @@ import java.io.RandomAccessFile;
 
 public class DiskSpace {
 	
-	public void WriteArea(int area, byte[] data, String FileName) throws IOException {
+	public static void WriteArea(int area, byte[] data, String FileName) throws IOException {
 		RandomAccessFile file = new RandomAccessFile(FileName, "rw");
 		file.seek(area);
 		file.write(data);
 		file.close();
     }
   
-	public byte[] ReadArea(int area, String FileName) throws IOException {
+	public static byte[] ReadArea(int area, String FileName) throws IOException {
 		RandomAccessFile file = new RandomAccessFile(FileName, "r");
 		file.seek(area);
 		byte[] bytes = new byte[1024]; //need to specify size of byte array somehow?
