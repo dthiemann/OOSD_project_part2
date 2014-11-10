@@ -2,7 +2,7 @@ package org.uiowa.cs2820.engine;
 
 import java.nio.ByteBuffer;
 //import java.nio.IntBuffer;
-import java.util.Arrays;
+//import java.util.Arrays;
 
 /*
  * Kblock class is used by FieldStorage and IdStorage to:
@@ -15,7 +15,6 @@ import java.util.Arrays;
  */
 public class Kblock {
 	// Class variables
-	private final int DATAINDEX = 8;
 	private int pointer;
 	private int size;
 	private byte[] data;		
@@ -26,18 +25,20 @@ public class Kblock {
 		// Get the ID pointer and Data size from byte array
 		ByteBuffer bb = ByteBuffer.wrap( b );
 		//IntBuffer ib = bb.asIntBuffer();  --- dont need??
-		pointer = bb.getInt( 0 );
-		size = bb.getInt( 1 );
+		pointer = bb.getInt();
+		size = bb.getInt();
 		// Get the Data from the byte array
-		data = Arrays.copyOfRange( b, DATAINDEX, size );
+		data = new byte[size];
+		bb.get(data);
 		
 	}
+	
 	// constructor 2
 	// When given a pointer and a byte array of data to write to a file
 	public Kblock( int p, byte[] b ){
-		this.pointer = p;
+		pointer = p;
 		size = b.length;
-		data = Arrays.copyOf( b, b.length );
+		data = b;
 	}
 	
 	// internal methods

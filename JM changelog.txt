@@ -1,5 +1,26 @@
 Joe Maule ChangeLog
 
+Update (11/9):
++ Kblock class:
+	- Did some testing with ByteBuffers
+	- Fixed code so Kblock class now works correctly
+	
++ FieldStorage class:
+	- Added a get() method to retrieve the actual Field from file
+		:: Takes an integer and reads that index from file
+		:: Only returns the byte array - data would then need to be 
+		      converted to a Field object
+
++ FileStorage interface:
+	- Re-added the get() method now that Field- and Id-Storage contain this method
+		:: Takes an integer and returns a byte array
+
++ IdStorage class:
+	- Added code to get the full byte array of data for identifiers
+	- Questions regarding put()/del() methods
+
+---------------
+
 Update (11/8):
 + Created a Kblock class:
 	- used internally for Field- and Id-Storage classes

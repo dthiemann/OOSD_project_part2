@@ -1,5 +1,7 @@
 package org.uiowa.cs2820.engine;
 
+import java.util.Arrays;
+
 public class IdStorage implements FileStorage {
 	private final String fileType = "ID";
 	
@@ -7,24 +9,49 @@ public class IdStorage implements FileStorage {
 	// -- takes an index integer pointing to location on file
 	public byte[] get( int index ){
 		// DO SOMETHING
-		return null;
+		return rebuild(index);
 	}
 	
 	// Save an Identifier to the file
 	// Requires getting all Identifiers,
 	//   appending new ID to list, then
 	//   re-converting to byte[], splitting into 1k blocks, and writing to file
-	public void put( byte[] f ){
+	public void put( byte[] id ){
 		// DO SOMETHING
+		
+		// what specifically is going to get passed to this method?
+		// a single identifier? or a full arraylist as byte[]?
+		
 	}
 	
 	// Delete an Identifier from the file
-	public void del( byte[] f ){
+	public void del( byte[] id ){
 		// DO SOMETHING
+		
+		// Is this method simply deleting a full set of ID's for a
+		// a given Field, or do we need to be able to delete just *1*
+		// ID from the arraylist?
 	}
 	
+	// Read all Identifier blocks from file and recompile them into 1 byte array
 	private byte[] rebuild( int index ){
 		// DO SOMETHING
-		return null;
+		Kblock kb = DSPACE_read( index );
+		byte[] id = kb.getData();
+		
+		while( kb.getPointer() != 0 ){
+			// Get next 1kb block of data
+			kb = DSPACE_read( kb.getPointer() );
+			
+			// Expand id array size to add new 1kb block data
+			byte[] tempid = id.clone();
+			id = new byte[ id.length + kb.getData().length ];
+			
+			// Add new data to id array
+			System.arraycopy( tempid, 0, id, 0, tempid.length);
+			System.arraycopy( kb.getData(), 0, id, 0, tempid.length);
+		}
+		
+		return id;
 	}
 }

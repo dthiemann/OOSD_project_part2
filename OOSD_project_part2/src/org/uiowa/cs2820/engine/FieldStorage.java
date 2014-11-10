@@ -7,6 +7,15 @@ import java.util.Arrays;
 public class FieldStorage implements FileStorage {
 	private final String fileType = "FIELD";
 	
+	
+	// Get the Field at a given index from the file
+	// Returns as byte array
+	public byte[] get( int index ){
+		Kblock kb = DSPACE_read( index, fileType );
+		return kb.getData();
+	}
+	
+	
 	// Get the starting index (pointer) for Identifiers from a given Field
 	// -- takes a byte array Field
 	// -- returns pointer integer of Identifiers

@@ -5,8 +5,7 @@ package org.uiowa.cs2820.engine;
  */
 
 public interface FileStorage {
-	// Will re-implement if can find way to return a generic
-	// <E> byte[] get( E n );
+	byte[] get( int n );
 	void put( byte[] n );
 	void del( byte[] n );
 	
