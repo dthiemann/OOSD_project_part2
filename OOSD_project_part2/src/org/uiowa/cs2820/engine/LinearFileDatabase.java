@@ -14,7 +14,7 @@ public class LinearFileDatabase implements Database {
 		
 		/*
 		 * Something needs to happen here! Not to sure what.
-		 * Need to access the files using a byte array
+		 * Need to access the files using a byte array. 
 		 */
 		
 		return null;
@@ -24,12 +24,20 @@ public class LinearFileDatabase implements Database {
 	public void delete(byte[] key, String id) {
 		// TODO Auto-generated method stub
 		
+		/*
+		 * Field(Key?)Storage.java needs to change so I can 
+		 * pass in these values in one function call. In order to delete
+		 * the appropriate value!
+		 */
 
 	}
 
 	@Override
 	public void store(byte[] key, String id) {
 		// TODO Auto-generated method stub
+		
+		// this is wrong and needs to be changed
+		Kblock myNode = new Kblock(key);
 		
 	}
 

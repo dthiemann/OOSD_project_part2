@@ -19,7 +19,7 @@ public class FieldStorage implements FileStorage {
 	// Get the starting index (pointer) for Identifiers from a given Field
 	// -- takes a byte array Field
 	// -- returns pointer integer of Identifiers
-	public int getPointer( Field f ){
+	public int getPointer( byte[] f ){
 		// need to fix method names  *** assuming Allocate and DiskSpace are static??
 		for( int index = 0; index < ALLOC_size(); index++ ){
 			Kblock kb = DSPACE_read( index, fileType );
