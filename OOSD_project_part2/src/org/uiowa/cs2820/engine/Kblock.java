@@ -43,8 +43,8 @@ public class Kblock {
 	
 	// internal methods
 	public byte[] getBlock(){
-		// FIND A WAY TO PUT ALL DATA INTO A 1KB BLOCK
-		byte[] block = new byte[1000];
+		// Create a new 1kb block of data to write to a file
+		byte[] block = new byte[1024];
 		ByteBuffer bb = ByteBuffer.wrap( block );
 		bb.putInt( pointer );
 		bb.putInt( size );

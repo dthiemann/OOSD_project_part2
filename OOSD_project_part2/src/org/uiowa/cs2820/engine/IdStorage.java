@@ -24,14 +24,6 @@ public class IdStorage implements FileStorage {
 		
 	}
 	
-	// Delete an Identifier from the file
-	public void del( byte[] id ){
-		// DO SOMETHING
-		
-		// Is this method simply deleting a full set of ID's for a
-		// a given Field, or do we need to be able to delete just *1*
-		// ID from the arraylist?
-	}
 	
 	// Read all Identifier blocks from file and recompile them into 1 byte array
 	private byte[] rebuild( int index ){

@@ -7,7 +7,6 @@ package org.uiowa.cs2820.engine;
 public interface FileStorage {
 	byte[] get( int n );
 	void put( byte[] n );
-	void del( byte[] n );
 	
 	// probably don't need this method
 	// void add( byte[] n );
