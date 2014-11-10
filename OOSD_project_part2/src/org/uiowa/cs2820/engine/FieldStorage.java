@@ -24,7 +24,8 @@ public class FieldStorage implements FileStorage {
 		for( int index = 0; index < ALLOC_size(); index++ ){
 			Kblock kb = DSPACE_read( index, fileType );
 			Field curField = (Field) Field.revert( kb.getData() );
-			if( curField.equals(f) ){
+			Field inputField = (Field) Field.revert(f);
+			if( curField.equals(inputField) ){
 				return kb.getPointer();
 			}
 		}
