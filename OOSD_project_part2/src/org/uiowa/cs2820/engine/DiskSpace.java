@@ -2,10 +2,13 @@ package org.uiowa.cs2820.engine;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
+//Written by Jason Sherman
 
+//Whatever calls this should send a FileName of either ID or FIELD
 public class DiskSpace {
 	
 	public static void WriteArea(int area, byte[] data, String FileName) throws IOException {
+		area = area*1024;
 		RandomAccessFile file = new RandomAccessFile(FileName, "rw");
 		file.seek(area);
 		file.write(data);
@@ -13,6 +16,7 @@ public class DiskSpace {
     }
   
 	public static byte[] ReadArea(int area, String FileName) throws IOException {
+		area = area*1024;
 		RandomAccessFile file = new RandomAccessFile(FileName, "r");
 		file.seek(area);
 		byte[] bytes = new byte[1024]; //need to specify size of byte array somehow?
@@ -21,7 +25,4 @@ public class DiskSpace {
 		return bytes;
 
   	}
-//Where exactly will it write this file? Will it be able to find it once it is written?
-//Maybe add 3rd method to see what file name I am using from keystorage/idstorage 
-//so that i can send to correct file for the parameter "FileName":ID or KEY
 }
