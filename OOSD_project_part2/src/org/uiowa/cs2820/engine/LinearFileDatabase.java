@@ -1,5 +1,7 @@
 package org.uiowa.cs2820.engine;
 
+import java.util.*; 
+
 public class LinearFileDatabase implements Database {
 	FieldStorage f_storage;
 	IdStorage id_storage;
@@ -20,8 +22,8 @@ public class LinearFileDatabase implements Database {
 		 */
 		
 		int my_pointer = f_storage.getPointer(key);
-		byte[] identifiers = id_storage.get(my_pointer);
- 		
+		ArrayList<Object> identifiers = id_storage.get(my_pointer);
+		 		
 		return my_node;
 	}
 
