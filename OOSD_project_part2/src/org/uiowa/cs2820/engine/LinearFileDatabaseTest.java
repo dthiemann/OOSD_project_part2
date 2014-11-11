@@ -25,6 +25,8 @@ public class LinearFileDatabaseTest {
 		
 		db.store(byteArray, id);
 		
+		db.fetch(byteArray);
+		
 		assertEquals(0,0);
 	}
 	

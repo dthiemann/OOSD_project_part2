@@ -2,9 +2,11 @@ package org.uiowa.cs2820.engine;
 
 public class LinearFileDatabase implements Database {
 	FieldStorage f_storage;
+	IdStorage id_storage;
 	
 	public LinearFileDatabase() {
 		this.f_storage = new FieldStorage();
+		this.id_storage = new IdStorage();
 	}
 
 	@Override
@@ -18,20 +20,15 @@ public class LinearFileDatabase implements Database {
 		 */
 		
 		int my_pointer = f_storage.getPointer(key);
-		Node my_node =  (Node) Field.revert(f_storage.get(my_pointer));
-		
+		byte[] identifiers = id_storage.get(my_pointer);
+ 		
 		return my_node;
 	}
 
 	@Override
 	public void delete(byte[] key, String id) {
-		// TODO Auto-generated method stub
 		
 		/*
-		 * Field(Key?)Storage.java needs to change so I can 
-		 * pass in these values in one function call. In order to delete
-		 * the appropriate value!
-		 * 
 		 * Don't need to worry about this for the overall implementaion
 		 */
 

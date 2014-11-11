@@ -7,9 +7,10 @@ public class IdStorage implements FileStorage {
 	
 	// Get the Identifiers from a given Field
 	// -- takes an index integer pointing to location on file
-	public byte[] get( int index ){
+	public ArrayList<Object> get( int index ){
 		// DO SOMETHING
-		return rebuild(index);
+		//return rebuild(index);
+		return null;
 	}
 	
 	// Save an Identifier to the file
