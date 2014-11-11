@@ -13,7 +13,18 @@ public class LinearFileDatabaseTest {
 	}
 	
 	@Test
-	public void sampleTest() {
+	public void fetchTest() {
+		LinearFileDatabase db = new LinearFileDatabase();
+		String fieldKey = "myKey";
+		String fieldValue = "myValue";
+		
+		String id = "file1.txt";
+		
+		Field f = new Field(fieldKey, fieldValue);
+		byte[] byteArray = f.toBytes();
+		
+		db.store(byteArray, id);
+		
 		assertEquals(0,0);
 	}
 	
