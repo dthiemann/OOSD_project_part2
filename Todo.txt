@@ -2,7 +2,7 @@ To do for team #1 for OOSD project part 2
 
 Tim - Checkpoint.java & Allocation.java
 Joe - KeyStorage.java & ValueStorage.java (name may change)
-Dylan - LinearFileDatabase.java
+Dylan - LinearFileDatabase.java - assisting with KeyStorage.java & ValueStorage.java
 Jason - DiskSpace.java - also setting up UnitTests
 
 **Updated** Description: Allocate 
