@@ -24,6 +24,11 @@ public class IdStorage implements FileStorage {
 		// what specifically is going to get passed to this method?
 		// a single identifier? or a full arraylist as byte[]?
 		
+		/*
+		 * How do we determine which key these identifiers 
+		 * belong too?
+		 */
+		
 	}
 	
 	

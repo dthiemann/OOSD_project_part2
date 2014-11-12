@@ -14,16 +14,19 @@ public class LinearFileDatabase implements Database {
 	@Override
 	public Node fetch(byte[] key) {
 		// TODO Auto-generated method stub
-		//Node myNode = f_storage.get(key);
 		
-		/*
-		 * Something needs to happen here! Not to sure what.
-		 * Need to access the files using a byte array. 
-		 */
-		
+		/* Key a pointer to our value list */
 		int my_pointer = f_storage.getPointer(key);
-		ArrayList<Object> identifiers = id_storage.get(my_pointer);
-		 		
+		ArrayList<Object> identifiers = id_storage.get(my_pointer);	
+		
+		Node my_node = new Node(key, (String)identifiers.get(0));
+		
+		/* Need to add each string individually to the new node */
+		for (int i = 1; i < identifiers.size(); i++) {
+			String temp = (String)identifiers.get(i);
+			my_node.add(temp);
+		}
+		
 		return my_node;
 	}
 
