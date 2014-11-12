@@ -1,30 +1,29 @@
 package org.uiowa.cs2820.engine;
 
-import java.util.Arrays;
+import java.io.IOException;
+//import java.util.Arrays;
 
 
-
-public class FieldStorage implements FileStorage {
-	private final String fileType = "FIELD";
-	
+public class FieldStorage {
+	private final String FILETYPE = "FIELD";
 	
 	// Get the Field at a given index from the file
 	// Returns as byte array
-	public byte[] get( int index ){
-		Kblock kb = DSPACE_read( index, fileType );
+	public byte[] get( int index ) throws IOException {
+		Kblock kb = new Kblock( DiskSpace.ReadArea( index, FILETYPE ) );
 		return kb.getData();
 	}
-	
 	
 	// Get the starting index (pointer) for Identifiers from a given Field
 	// -- takes a byte array Field
 	// -- returns pointer integer of Identifiers
-	public int getPointer( byte[] f ){
-		// need to fix method names  *** assuming Allocate and DiskSpace are static??
-		for( int index = 0; index < ALLOC_size(); index++ ){
-			Kblock kb = DSPACE_read( index, fileType );
-			Field paramField = (Field) Field.revert( f );
-			Field kbField = (Field) Field.revert( kb.getData() );
+	public int getPointer( byte[] f ) throws IOException {
+		// fix comments
+		int allocSize = Allocation.size();
+		for( int index = 1; index < allocSize; index++ ){
+			Kblock kb = new Kblock( DiskSpace.ReadArea( index, FILETYPE ) );
+			Field paramField = (Field) Utility.revert( f );
+			Field kbField = (Field) Utility.revert( kb.getData() );
 			if( paramField.equals( kbField ) ){
 				return kb.getPointer();
 			}
@@ -32,15 +31,16 @@ public class FieldStorage implements FileStorage {
 		return -1;
 	}
 	
-	// Get the index in Allocate for a given Field
+	// Get the index of a given Field in its file
 	// -- takes a byte array Field
-	// -- returns index integer for Allocate bit array
-	public int getIndex( byte[] f ){
-		// need to fix method names  *** assuming Allocate and DiskSpace are static??
-		for( int index = 0; index < ALLOC_size(); index++ ){
-			Kblock kb = DSPACE_read( index, fileType );
-			Field paramField = (Field) Field.revert( f );
-			Field kbField = (Field) Field.revert( kb.getData() );
+	// -- returns index integer for Field
+	public int getIndex( byte[] f ) throws IOException {
+		// fix comments
+		int allocSize = Allocation.size();
+		for( int index = 1; index < allocSize; index++ ){
+			Kblock kb = new Kblock( DiskSpace.ReadArea( index, FILETYPE ) );
+			Field paramField = (Field) Utility.revert( f );
+			Field kbField = (Field) Utility.revert( kb.getData() );
 			if( paramField.equals( kbField ) ){
 				return index;
 			}
@@ -50,17 +50,17 @@ public class FieldStorage implements FileStorage {
 	
 	
 	// Save a Field to the file, unless Field already exists
-	public void put( byte[] f ){
-		// DO SOMETHING
-		
+	public void put( byte[] f ) throws IOException {
 		// find field in file
-		int pointer = this.getPointer( f );
-		if( pointer == -1 ){
-			// get free block from Allocate bit array
-			int index = ALLOC_alloc();
+		int fIndex = this.getIndex( f );
+		if( fIndex == -1 ){
+			// get free block from Allocate Field bit array
+			int index = Allocation.allocate(FILETYPE);
+			// get free block from Allocate Identifier bit array (without setting it)
+			int pointer = Allocation.allocateID();
 			// create 1kb block for file
-			Kblock kb = new Kblock( pointer, f );
-			DSPACE_write( index, kb, fileType );
+			Kblock kb = new Kblock( index, f );
+			DiskSpace.WriteArea( index, kb.getBlock(), FILETYPE );
 		}
 	}
 

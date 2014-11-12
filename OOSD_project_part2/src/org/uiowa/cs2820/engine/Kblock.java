@@ -1,8 +1,6 @@
 package org.uiowa.cs2820.engine;
 
 import java.nio.ByteBuffer;
-//import java.nio.IntBuffer;
-//import java.util.Arrays;
 
 /*
  * Kblock class is used by FieldStorage and IdStorage to:
@@ -13,6 +11,7 @@ import java.nio.ByteBuffer;
  *  	  NEEDS TO BE TESTED (ByteBuffer get/put etc)
  *  
  */
+
 public class Kblock {
 	// Class variables
 	private int pointer;
@@ -30,7 +29,6 @@ public class Kblock {
 		// Get the Data from the byte array
 		data = new byte[size];
 		bb.get(data);
-		
 	}
 	
 	// constructor 2
