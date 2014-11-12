@@ -12,7 +12,6 @@ public class IdStorage {
 	@SuppressWarnings("unchecked")
 	public ArrayList<Object> get( int index ) throws IOException {
 		// DO SOMETHING
-<<<<<<< HEAD
 		//return rebuild(index);
 		return null;
 	}
@@ -39,11 +38,8 @@ public class IdStorage {
 	private byte[] rebuild( int index ){
 		// DO SOMETHING
 		Kblock kb = DSPACE_read( index );
-=======
 		Kblock kb = new Kblock( DiskSpace.ReadArea( index, FILETYPE ) );
->>>>>>> 1b9b73eb609c251a7ae956d943130ab17a4aeb07
 		byte[] id = kb.getData();
-		
 		while( kb.getPointer() != 0 ){
 			// Get next 1kb block of data
 			kb = new Kblock( DiskSpace.ReadArea( kb.getPointer(), FILETYPE ) );
