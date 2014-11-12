@@ -1,5 +1,6 @@
 package org.uiowa.cs2820.engine;
 
+import java.io.IOException;
 import java.util.*; 
 
 public class LinearFileDatabase implements Database {
@@ -14,10 +15,15 @@ public class LinearFileDatabase implements Database {
 	@Override
 	public Node fetch(byte[] key) {
 		// TODO Auto-generated method stub
-		
+		ArrayList<Object> identifiers = null;
 		/* Key a pointer to our value list */
-		int my_pointer = f_storage.getPointer(key);
-		ArrayList<Object> identifiers = id_storage.get(my_pointer);	
+		try {	
+			int my_pointer = f_storage.getPointer(key);
+			identifiers = id_storage.get(my_pointer);	
+		} catch (IOException e) {
+			
+			System.err.println("Caught IOException: " + e.getMessage());
+		}
 		
 		Node my_node = new Node(key, (String)identifiers.get(0));
 		
@@ -42,11 +48,11 @@ public class LinearFileDatabase implements Database {
 	@Override
 	public void store(byte[] key, String id) {
 		// TODO Auto-generated method stub
-		
-		// this is wrong and needs to be changed
-		Kblock myNode = new Kblock(key);
-		
-		
+		try {
+			f_storage.put(key);
+		} catch(IOException e) {
+			System.err.println("Caught IOException: " + e.getMessage());
+		}
 	}
 
 }
