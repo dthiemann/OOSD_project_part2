@@ -1,5 +1,48 @@
 Joe Maule ChangeLog
 
+Update (11/11):
++ FileStorage interface:
+	- Deleted this class for the time being, as its use was becoming too limited
+	- Will re-implement if find a way to better contain methods from Field/ID-Storage
+	
++ Utility class:
+	- Created to store the convert() and revert() methods
+		:: In order to convert file data to ArrayList, I needed use of these, and
+		   found calling a Field class method to do so was improper coding
+		:: At this moment, I don't believe anyone else is using these 2 methods,
+		   but if this changes, can just use Utility.convert() instead of calling from Field
+		   
++ IdStorage class:
+	- Methods have now been completed
+		:: get() is now functioning to rebuild all data from file and return the ArrayList
+		:: put() will write to the ID file
+		:: freePointers() - internal method to clear all indices in Allocation's bit array for re-writing;
+			this made for simpler code than creating an array of all ID pointers, writing to those
+			pointers, then adjusting code in the event that 1 or more new blocks of data needed
+			to be written to the file
+		   
++ Some small tweaks to FieldStorage and Kblock classes
+	- Mostly bad logic from the FieldStorage class
+
++ Misc:
+	- Comments still need to be added/fixed
+	- I have not done Unit testing on the classes, so cannot say if Integration test will succeed
+	- For the Allocation class, as mentioned in class, I will need:
+		:: a size() method to return the length of the Field bit array (for iteration purposes)
+		:: an allocateID() method to get the index of the next free area of the ID file, but
+			that does not mark that index/area as 'written to' (i.e., don't set the bit at that index)
+			so that when the Field data is being written, it has a pointer to where the ID data
+			will be written to
+		:: Index 0 of each bit array will need to remain as un-set ("0") to be used as a Null pointer;
+			when using the allocate() method, it will need to ignore this bit so it doesn't 
+			accidentally set it
+	- Removed "abstract" from the method names in the Database interface.
+		:: Interface methods don't have any inherent code to be abstracted from in classes that
+			inherit the Database interface - this is why the LinearFileDatabase is throwing an error
+			about the @Override statement, since there's no code to deviate from
+
+---------------
+
 Update (11/10):
 + Kblock class:
 	- Fixed byte[] size to 1024 (I had it set to 1000 for some reason)
