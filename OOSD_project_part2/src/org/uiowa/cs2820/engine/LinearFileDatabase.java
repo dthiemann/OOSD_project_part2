@@ -28,6 +28,7 @@ public class LinearFileDatabase implements Database {
 		} catch (IOException e) {
 			
 			System.err.println("Caught IOException: " + e.getMessage());
+			return null;
 		}
 		
 		/*
