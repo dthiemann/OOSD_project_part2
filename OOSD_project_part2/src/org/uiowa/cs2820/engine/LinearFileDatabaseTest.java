@@ -5,6 +5,13 @@ import java.util.*;
 import org.junit.Before;
 import org.junit.Test;
 
+/*
+ * @author: Dylan Thiemann
+ * 
+ * Test file for LinearFileDatabase.java
+ * 
+ */
+
 public class LinearFileDatabaseTest {
 	
 	@Before

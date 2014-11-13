@@ -3,6 +3,15 @@ package org.uiowa.cs2820.engine;
 import java.io.IOException;
 import java.util.*; 
 
+/*
+ * @author: Dylan Thiemann
+ * 
+ * implements the Database interface. Allows the user to store
+ * indexed keys and values in files on the disk, as opposed
+ * to using a built-in Java data structures
+ * 
+ */
+
 public class LinearFileDatabase implements Database {
 	FieldStorage f_storage;
 	IdStorage id_storage;
@@ -16,7 +25,6 @@ public class LinearFileDatabase implements Database {
 	public Node fetch(byte[] key) {
 		// TODO Auto-generated method stub
 		ArrayList<Object> identifiers = null;
-		/* Key a pointer to our value list */
 		
 		/* 
 		 * Try to get a pointer to our values from
