@@ -1,6 +1,7 @@
 package org.uiowa.cs2820.engine;
 
 import java.io.IOException;
+import java.util.*;
 
 /*
  * @Author: Dylan Thiemann
@@ -10,6 +11,17 @@ import java.io.IOException;
  */
 
 public class MockFieldStorage {
+	ArrayList<Integer> keyArray;
+	HashMap<byte[], Integer> keyHash;
+	HashMap<Integer, byte[]> integerHash;
+	int currentNum;
+	
+	public MockFieldStorage() {
+		this.keyArray = new ArrayList<Integer>();
+		this.keyHash = new HashMap<byte[], Integer>();
+		this.integerHash = new HashMap<Integer, byte[]>();
+		this.currentNum = 0;
+	}
 
 	public byte[] get( int index ) throws IOException {
 		return null;
