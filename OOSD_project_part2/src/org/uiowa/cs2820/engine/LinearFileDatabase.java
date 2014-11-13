@@ -17,6 +17,11 @@ public class LinearFileDatabase implements Database {
 		// TODO Auto-generated method stub
 		ArrayList<Object> identifiers = null;
 		/* Key a pointer to our value list */
+		
+		/* 
+		 * Try to get a pointer to our values from
+		 * a given key
+		 */
 		try {	
 			int my_pointer = f_storage.getPointer(key);
 			identifiers = id_storage.get(my_pointer);	
@@ -25,6 +30,11 @@ public class LinearFileDatabase implements Database {
 			System.err.println("Caught IOException: " + e.getMessage());
 		}
 		
+		/*
+		 * Create a new node to return to the user by iterating
+		 * through the ArrayList<Object> instance and adding it
+		 * to the element
+		 */
 		Node my_node = new Node(key, (String)identifiers.get(0));
 		
 		/* Need to add each string individually to the new node */
@@ -38,11 +48,9 @@ public class LinearFileDatabase implements Database {
 
 	@Override
 	public void delete(byte[] key, String id) {
-		
 		/*
-		 * Don't need to worry about this for the overall implementaion
+		 * Don't need to worry about this for the overall implementation
 		 */
-
 	}
 
 	@Override
