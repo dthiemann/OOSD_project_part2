@@ -58,6 +58,11 @@ public class LinearFileDatabase implements Database {
 		// TODO Auto-generated method stub
 		try {
 			f_storage.put(key);
+			
+			/* Get a pointer to our id_storage */
+			int pointer = f_storage.getPointer(key);
+			id_storage.put(pointer, id);
+			
 		} catch(IOException e) {
 			System.err.println("Caught IOException: " + e.getMessage());
 		}
