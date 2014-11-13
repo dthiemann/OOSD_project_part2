@@ -1,6 +1,19 @@
 Joe Maule ChangeLog
 
-Update (11/12):
+Update (11/12) v2.0 :
++ Fixed comments for all of my classes (FieldStorage, IdStorage, Kblock, and Utility)
+
++ FieldStorage class:
+	- Created an internal findField() class to handle iterating through file, to avoid
+		code duplication from different methods
+
++ Misc:
+	- Need Allocation.allocate() method to accept a String parameter to denote which of
+		the 2 bit arrays it needs to find a free space for ("FIELD" or "ID")
+	- Need Allocation.getIDindex() method {or similar name} in order to get the ID index
+		for writing a Field to a file  {similar to allocate() but without setting the bit to '1'}
+
+Update (11/12) v1.0 :
 + Checkpoint class:
 	- fixed the calls to convert() and revert() since these methods were moved to
 		the Utility class from the Field class

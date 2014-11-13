@@ -2,14 +2,17 @@ package org.uiowa.cs2820.engine;
 
 import java.nio.ByteBuffer;
 
-/*
- * Kblock class is used by FieldStorage and IdStorage to:
- *  + read the 1kb blocks of data from their respective files
- *  + create 1kb blocks of data to write to respective files
- *  
- *  NOTE: this is currently acting like my own internal "Node" class
- *  	  NEEDS TO BE TESTED (ByteBuffer get/put etc)
- *  
+/**
+ * Joe Maule
+ * CS:2820, Fall 2014
+ *
+ * Purpose:
+ * 	This class is used by FieldStorage and IdStorage to:
+ * 	  + read the 1kb blocks of data from their respective files
+ *    + create 1kb blocks of data to write to their respective files
+ *    
+ * Format of 1kb blocks:
+ * 	  [ pointer | size | data | (empty space) ]
  */
 
 public class Kblock {
@@ -18,31 +21,30 @@ public class Kblock {
 	private int size;
 	private byte[] data;		
 	
-	// constructor 1
-	// When given a 1kb block of data (read) from a file
+	// Constructor 1: When given a 1kb block of data read from a file
 	public Kblock( byte[] b ){
-		// Get the ID pointer and Data size from byte array
+		// Get the ID pointer and data size from byte array
 		ByteBuffer bb = ByteBuffer.wrap( b );
-		//IntBuffer ib = bb.asIntBuffer();  --- dont need??
 		pointer = bb.getInt();
 		size = bb.getInt();
-		// Get the Data from the byte array
+		// Get the data from the byte array
 		data = new byte[size];
 		bb.get(data);
 	}
 	
-	// constructor 2
-	// When given a pointer and a byte array of data to write to a file
+	// Constructor 2: When given a pointer and byte array of data to write to a file
 	public Kblock( int p, byte[] b ){
+		// Set local variables
 		pointer = p;
 		size = b.length;
 		data = b;
 	}
 	
-	// internal methods
+	// Create a 1kb byte array of data to write to a file
 	public byte[] getBlock(){
-		// Create a new 1kb block of data to write to a file
+		// Create a byte array to store data
 		byte[] block = new byte[1024];
+		// Add data to byte array and return it
 		ByteBuffer bb = ByteBuffer.wrap( block );
 		bb.putInt( pointer );
 		bb.putInt( size );
@@ -50,11 +52,8 @@ public class Kblock {
 		return block;
 	}
 	
-	public int getPointer(){
-		return pointer;
-	}
-	
-	public byte[] getData(){
-		return data;
-	}
+	/** Get() Methods */
+	public int getPointer(){ return pointer; }
+	public byte[] getData(){ return data; }
+
 }

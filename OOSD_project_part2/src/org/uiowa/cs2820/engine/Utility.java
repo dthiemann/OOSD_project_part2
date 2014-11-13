@@ -7,6 +7,19 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 
+/**
+ * Joe Maule
+ * CS:2820, Fall 2014
+ *
+ * Purpose:
+ * 	Convert data into a byte array;
+ * 	Restore data from a byte array
+ * 
+ * Note:
+ * 	These methods were pulled from the Field class so other classes were
+ * 	not dependent upon calling methods from that class.
+ */
+
 public class Utility {
 
 	public static byte[] convert(Object O) {
@@ -24,6 +37,7 @@ public class Utility {
 		  }
 		
 		public static Object revert(byte[] seq) {
+		  // private method converts byte array into an object
 		  Object O = null;  // default value
 		  try {
 			ByteArrayInputStream M = new ByteArrayInputStream(seq);

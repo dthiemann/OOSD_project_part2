@@ -1,67 +1,72 @@
 package org.uiowa.cs2820.engine;
 
 import java.io.IOException;
-//import java.util.Arrays;
 
+/**
+ * Joe Maule
+ * CS:2820, Fall 2014
+ *
+ * Purpose:
+ * 	Used by a Database to read/write a Field object from/to a file
+ * 	  + FieldStorage data contains a pointer (index) to the first 1kb of data
+ * 		of its corresponding Identifiers in its respective file, in order to
+ * 		easily retrieve that data in linear time.
+ */
 
 public class FieldStorage {
+	// Class variable
 	private final String FILETYPE = "FIELD";
 	
-	// Get the Field at a given index from the file
-	// Returns as byte array
+	// Gets the Field at a given index from the file; returns as a byte array
 	public byte[] get( int index ) throws IOException {
 		Kblock kb = new Kblock( DiskSpace.ReadArea( index, FILETYPE ) );
 		return kb.getData();
 	}
 	
-	// Get the starting index (pointer) for Identifiers from a given Field
-	// -- takes a byte array Field
-	// -- returns pointer integer of Identifiers
+	// Gets the pointer (starting index) for the Identifiers of a given Field
 	public int getPointer( byte[] f ) throws IOException {
-		// fix comments
-		int allocSize = Allocation.size();
-		for( int index = 1; index < allocSize; index++ ){
-			Kblock kb = new Kblock( DiskSpace.ReadArea( index, FILETYPE ) );
-			Field paramField = (Field) Utility.revert( f );
-			Field kbField = (Field) Utility.revert( kb.getData() );
-			if( paramField.equals( kbField ) ){
-				return kb.getPointer();
-			}
-		}
-		return -1;
+		return findField( f, "POINTER" );
 	}
 	
 	// Get the index of a given Field in its file
-	// -- takes a byte array Field
-	// -- returns index integer for Field
 	public int getIndex( byte[] f ) throws IOException {
-		// fix comments
-		int allocSize = Allocation.size();
-		for( int index = 1; index < allocSize; index++ ){
-			Kblock kb = new Kblock( DiskSpace.ReadArea( index, FILETYPE ) );
-			Field paramField = (Field) Utility.revert( f );
-			Field kbField = (Field) Utility.revert( kb.getData() );
-			if( paramField.equals( kbField ) ){
-				return index;
-			}
-		}
-		return -1;
+		return findField( f, "INDEX" );
 	}
-	
-	
+		
 	// Save a Field to the file, unless Field already exists
 	public void put( byte[] f ) throws IOException {
-		// find field in file
+		// Find Field in file
 		int fIndex = this.getIndex( f );
 		if( fIndex == -1 ){
-			// get free block from Allocate Field bit array
+			// Get index of free block from Field bit array
 			int index = Allocation.allocate(FILETYPE);
-			// get free block from Allocate Identifier bit array (without setting it)
+			// Get index of free block from Identifier bit array (for ID pointer)
 			int pointer = Allocation.getID();
-			// create 1kb block for file
+			// Create 1kb block and write to file
 			Kblock kb = new Kblock( index, f );
 			DiskSpace.WriteArea( index, kb.getBlock(), FILETYPE );
 		}
+	}
+	
+	// Search for a given Field and return the data requested
+	private int findField( byte[] f, String intType ) throws IOException {
+		// Iterate through the Field file to locate the given Field
+		Field paramField = (Field) Utility.revert( f );
+		int allocSize = Allocation.size();
+		for( int index = 1; index < allocSize; index++ ){
+			Kblock kb = new Kblock( DiskSpace.ReadArea( index, FILETYPE ) );
+			Field kbField = (Field) Utility.revert( kb.getData() );
+			if( paramField.equals( kbField ) ){
+				if( intType == "INDEX" ){
+					return index;
+				}
+				else{
+					return kb.getPointer();
+				}
+			}
+		}
+		// If Field not found:
+		return -1;
 	}
 
 }

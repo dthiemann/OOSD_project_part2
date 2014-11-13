@@ -3,66 +3,69 @@ package org.uiowa.cs2820.engine;
 import java.io.IOException;
 import java.util.ArrayList;;
 
+/**
+ * Joe Maule
+ * CS:2820, Fall 2014
+ *
+ * Purpose:
+ * 	Used by a Database to read/write an Identifier object from/to a file
+ * 	  + Identifiers are of the form ArrayList<Object>
+ * 	  + More specifically, in this iteration of the Project, it is an ArrayList<String>
+ */
+
 public class IdStorage {
+	// Class variables
 	private final String FILETYPE = "ID";
-	private final int MAXSIZE = 1016;	// = 1kb - 2 4-byte Integers
+	private final int MAXSIZE = 1016;		// = 1kb - (2) 4-byte Integers
 	
-	// Get the Identifiers from a given Field
-	// -- takes an index integer pointing to location on file
+	// Get the list of Identifiers for a given Field
 	@SuppressWarnings("unchecked")
 	public ArrayList<Object> get( int index ) throws IOException {
-		// DO SOMETHING
+		// Read the first 1kb of data from file
 		Kblock kb = new Kblock( DiskSpace.ReadArea( index, FILETYPE ) );
 		byte[] id = kb.getData();
 		
+		// If Identifiers data is larger than one 1kb of data
 		while( kb.getPointer() != 0 ){
 			// Get next 1kb block of data
 			kb = new Kblock( DiskSpace.ReadArea( kb.getPointer(), FILETYPE ) );
-			
-			// Expand id array size to add new 1kb block data
+			// Expand Identifier array size to add new 1kb block data
 			byte[] tempid = id.clone();
 			id = new byte[ tempid.length + kb.getData().length ];
-			
-			// Add new data to id array
+			// Add new data to Identifier array
 			System.arraycopy( tempid, 0, id, 0, tempid.length);
 			System.arraycopy( kb.getData(), 0, id, 0, kb.getData().length);
 		}
-		
+		// Convert data to ArrayList and return to caller
 		ArrayList<Object> idList = (ArrayList<Object>) Utility.revert( id );
 		return idList;
 	}
 	
-	/* Save an Identifier to the file
-	* Requires getting all Identifiers,
-	* appending new ID to list, then
-	*   re-converting to byte[], splitting into 1kb blocks, and writing to file
-	* NEEDS:
-	* 		index (pointer from Field) - so class can rebuild all ID data from file; and
-	*		the Identifier as an Object - no need for LFDatabase to convert this data,
-	*		since Indexer is passing the ID as an Object (String, technically)
-	*		and this class has to rebuild the ArrayList to add it already
-	*/
+	// Save an Identifier to the file, unless it already exists
 	public void put( int startIndex, Object id ) throws IOException {
-		// DO SOMETHING
+		// Add new Identifier to list
 		ArrayList<Object> idList = this.get( startIndex );
+		if( idList.contains( id ) ){
+			return;
+		}
 		idList.add( id );
 		byte[] idData = Utility.convert( idList );
 		
-		// "clear" the data from file for writing new data
-		// by freeing the indices in Allocate
+		// "Clear" the data from file for writing new data
 		this.freePointers( startIndex );
 		
+		// Split data into 1kb blocks of data and write to file
 		int start = 0;
 		int index = Allocation.allocate( FILETYPE );
 		int pointer = 0;
 		
 		do{
-			// get info to create a 1kb block of data to write to file
+			// Get relevant info for a block of data
 			int size = Math.min( idData.length, MAXSIZE );
 			byte[] kbData = new byte[size];
 			System.arraycopy( idData, start, kbData, 0, size);
 			
-			// create new 1kb block
+			// Create new 1kb block
 			if( size > MAXSIZE ){
 				pointer = Allocation.allocate( FILETYPE );
 			}
@@ -71,30 +74,24 @@ public class IdStorage {
 			}
 			Kblock kb = new Kblock( pointer, kbData );
 			
-			// Write Kblock to file
+			// Write block of data to file
 			DiskSpace.WriteArea( index, kbData, FILETYPE );
-			// adjust index of ID array to point to next set of data
+			// Adjust index of data array to point to next set of data
 			start += size;
 			index = pointer;
 			
 		} while( start < idData.length );
-		
 	}
 	
-	// Get all pointers in ID blocks of data, and free their space
-	// via the Allocation ID bit array for rewriting
+	// Get all pointers for Identifier blocks of data,
+	// and mark their locations in file as "empty" for rewriting new data
 	private void freePointers( int index ) throws IOException {
-		// DO SOMETHING
 		int pointer = index;
-		
 		do{
 			Allocation.free( pointer );
 			Kblock kb = new Kblock( DiskSpace.ReadArea( pointer, FILETYPE ) );
 			pointer = kb.getPointer();
 		} while( pointer != 0 );
-		
-		
-		
 	}
 
 }
