@@ -12,34 +12,9 @@ public class IdStorage {
 	@SuppressWarnings("unchecked")
 	public ArrayList<Object> get( int index ) throws IOException {
 		// DO SOMETHING
-		//return rebuild(index);
-		return null;
-	}
-	
-	// Save an Identifier to the file
-	// Requires getting all Identifiers,
-	//   appending new ID to list, then
-	//   re-converting to byte[], splitting into 1k blocks, and writing to file
-	public void put( byte[] id ){
-		// DO SOMETHING
-		
-		// what specifically is going to get passed to this method?
-		// a single identifier? or a full arraylist as byte[]?
-		
-		/*
-		 * How do we determine which key these identifiers 
-		 * belong too?
-		 */
-		
-	}
-	
-	
-	// Read all Identifier blocks from file and recompile them into 1 byte array
-	private byte[] rebuild( int index ){
-		// DO SOMETHING
-		Kblock kb = DSPACE_read( index );
 		Kblock kb = new Kblock( DiskSpace.ReadArea( index, FILETYPE ) );
 		byte[] id = kb.getData();
+		
 		while( kb.getPointer() != 0 ){
 			// Get next 1kb block of data
 			kb = new Kblock( DiskSpace.ReadArea( kb.getPointer(), FILETYPE ) );

@@ -1,5 +1,18 @@
 Joe Maule ChangeLog
 
+Update (11/12):
++ Checkpoint class:
+	- fixed the calls to convert() and revert() since these methods were moved to
+		the Utility class from the Field class
++ Allocation class:
+	- changed size() to static to match the class
+	
++ IdStorage class:
+	- It looks like someone pushed an older version of this file to the repository;
+		so I've re-uploaded the newer version with methods coded, along with my other classes
+
+----------------		
+
 Update (11/11):
 + FileStorage interface:
 	- Deleted this class for the time being, as its use was becoming too limited

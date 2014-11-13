@@ -19,7 +19,7 @@ public class Checkpoint {
 	//(in 'a.txt') saves object as byte array
 	public static void save(Object O) {
 		byte[] data = new byte[(int) file.length()]; 
-		data = Field.convert(O);
+		data = Utility.convert(O);
 		FileOutputStream out = new FileOutputStream(file);
 		out.write(data);
 		out.close();
@@ -31,7 +31,7 @@ public class Checkpoint {
 		byte[] b = new byte[(int) file.length()];
 		fs.read(b);
 		Object O = new Object();
-		O = Field.revert(b);
+		O = Utility.revert(b);
 		return O;
 	}
 	

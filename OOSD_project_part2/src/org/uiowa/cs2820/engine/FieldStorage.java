@@ -57,7 +57,7 @@ public class FieldStorage {
 			// get free block from Allocate Field bit array
 			int index = Allocation.allocate(FILETYPE);
 			// get free block from Allocate Identifier bit array (without setting it)
-			int pointer = Allocation.allocateID();
+			int pointer = Allocation.getID();
 			// create 1kb block for file
 			Kblock kb = new Kblock( index, f );
 			DiskSpace.WriteArea( index, kb.getBlock(), FILETYPE );

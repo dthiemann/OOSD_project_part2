@@ -43,7 +43,7 @@ public class Allocation {
 		
 	}
 
-	public int size(){
+	public static int size(){
 		return bs.cardinality();
 		
 	}
