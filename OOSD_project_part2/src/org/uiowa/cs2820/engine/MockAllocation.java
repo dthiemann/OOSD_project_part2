@@ -34,9 +34,8 @@ public class MockAllocation {
 		bits[index] = 0;
 	}
 	
-	public static int size(String filename){
-		int[] bits = getFile(filename);
-		return bits.length;
+	public static int size(){
+		return bitField.length;
 	}
 	
 	// Determine which array to read/write from
