@@ -23,7 +23,7 @@ public class LinearFileDatabaseTest {
 	 */
 	@Test
 	public void fetchTest() {
-		LinearFileDatabase db = new LinearFileDatabase();
+		LinearFileDatabase db = new LinearFileDatabase(true);
 		String fieldKey = "myKey";
 		String fieldValue = "myValue";
 		
@@ -38,15 +38,16 @@ public class LinearFileDatabaseTest {
 		
 		Node newNode = db.fetch(byteArray);
 		
-		assertEquals(origNode, newNode);
+		assert(origNode.equals(newNode));
 	}
 	
 	/*
 	 * Tests storing multiple identifiers
 	 * for one field
 	 */
-	@Test void multiStoreTest() {
-		LinearFileDatabase db = new LinearFileDatabase();
+	@Test
+	public void multiStoreTest() {
+		LinearFileDatabase db = new LinearFileDatabase(true);
 		String fieldKey = "myKey";
 		String fieldValue = "myValue";
 		
@@ -76,10 +77,14 @@ public class LinearFileDatabaseTest {
 		/* Get our node back using db.fetch */
 		Node newNode = db.fetch(byteField);
 		
-		assertEquals(orig, newNode);
+		assert(orig.equals(newNode));
 	}
 	
-	
+	/* Test accessing identifiers that don't exist */
+	@Test
+	public void testNullFetch() {
+		
+	}
 	
 	
 }

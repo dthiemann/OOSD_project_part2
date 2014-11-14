@@ -25,6 +25,9 @@ public class LinearFileDatabase implements Database {
 		if (isTest) {
 			this.f_storage = new MockFieldStorage();
 			this.id_storage = new MockIdStorage();
+		} else {
+			this.f_storage = new FieldStorage();
+			this.id_storage = new IdStorage();
 		}
 	}
 
