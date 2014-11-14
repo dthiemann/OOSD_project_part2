@@ -9,11 +9,8 @@ Team 1 (Dylan T) (Jason S) (Joe M) (Tim M)
 
 package org.uiowa.cs2820.engine;
 
+import java.io.File;
 import java.util.BitSet;
-import java.lang.Object;
-import java.io.*; 
-
-import org.uiowa.cs2820.engine.Checkpoint;
 
 public class Allocation {
 
@@ -36,6 +33,15 @@ public class Allocation {
 		Checkpoint.save(bs);
 		return freespace;
 	}
+	
+	public static int fs(){
+		if (bs.isEmpty()){
+			return 0;
+		}
+		else{
+		    return bs.nextClearBit(0);
+		}
+	}
 
 	public static void free(int areaNum) {
 		bs.clear(areaNum);
@@ -43,7 +49,7 @@ public class Allocation {
 		
 	}
 
-	public static int size(){
+	public int size(){
 		return bs.cardinality();
 		
 	}
@@ -51,13 +57,13 @@ public class Allocation {
 public static void main(String [ ] args){
 		try {
 			File file = new File("a.txt");
-			bs = (BitSet) Checkpoint.restore(file);
+			bs = (BitSet) Checkpoint.restore("a.txt");
 			
-			FileOutputStream f = new FileOutputStream(file);
+			//FileOutputStream f = new FileOutputStream(file);
 			
 			if (!file.exists()){
 				file.createNewFile();
 			}
-	}
+	}       catch(Exception e){}
 }
 }
