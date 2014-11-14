@@ -1,7 +1,6 @@
 package org.uiowa.cs2820.engine;
 
 import static org.junit.Assert.*;
-import java.util.*;
 import org.junit.Before;
 import org.junit.Test;
 

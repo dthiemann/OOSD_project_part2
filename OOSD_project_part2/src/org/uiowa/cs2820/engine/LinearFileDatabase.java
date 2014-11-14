@@ -20,6 +20,13 @@ public class LinearFileDatabase implements Database {
 		this.f_storage = new FieldStorage();
 		this.id_storage = new IdStorage();
 	}
+	
+	public LinearFileDatabase(boolean isTest) {
+		if (isTest) {
+			this.f_storage = new MockFieldStorage();
+			this.id_storage = new MockIdStorage();
+		}
+	}
 
 	@Override
 	public Node fetch(byte[] key) {
