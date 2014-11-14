@@ -17,7 +17,7 @@ public class Checkpoint {
 	private final static File file1 = new File("a.txt");
 	private final static File file2 = new File("b.txt");
 
-	// (in 'a.txt') saves object as byte array
+	// saves object as byte array
 	public static void save(Object O, String param) throws Exception {
 		File temp = getFile(param);
 		checkFile(temp);
@@ -31,7 +31,7 @@ public class Checkpoint {
 		}
 	}
 
-	// (in 'a.txt') saves byte array as object
+	// restores byte array as object
 	public static BitSet restore(String file) throws Exception {
 		File temp = getFile(file);
 		checkFile(temp);		
