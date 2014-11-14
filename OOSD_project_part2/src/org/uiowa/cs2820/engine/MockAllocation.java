@@ -39,6 +39,7 @@ public class MockAllocation {
 		return bits.length;
 	}
 	
+	// Determine which array to read/write from
 	private static int[] getFile(String filename){
 		if( filename == "FIELD"){
 			return bitField;
@@ -48,6 +49,7 @@ public class MockAllocation {
 		}
 	}
 	
+	// Increase size of array
 	private static void expandBits(int[] bits){
 		int[] newBits = new int[bits.length * 2];
 		System.arraycopy(bits, 0, newBits, 0, bits.length);
