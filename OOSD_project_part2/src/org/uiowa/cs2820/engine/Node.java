@@ -3,6 +3,9 @@ package org.uiowa.cs2820.engine;
 import java.util.ArrayList;
 
 public class Node {
+	
+	/* made iVars protected for testing equality */
+	
   // Node is a basic unit in the database
   protected byte[] Key;  // Key of this node for lookup
   protected ArrayList<String> Identifiers;

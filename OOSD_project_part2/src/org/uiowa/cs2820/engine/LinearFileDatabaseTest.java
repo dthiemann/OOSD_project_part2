@@ -23,7 +23,14 @@ public class LinearFileDatabaseTest {
 	 */
 	@Test
 	public void fetchTest() {
-		LinearFileDatabase db = new LinearFileDatabase(true);
+		boolean testing = true;
+		
+		/* Testing with mock classes */
+		LinearFileDatabase db = new LinearFileDatabase(testing);
+		
+		/* Testing with actual classes */
+		//LinearFileDatabase db = new LinearFileDatabase();
+		 
 		String fieldKey = "myKey";
 		String fieldValue = "myValue";
 		
@@ -47,7 +54,14 @@ public class LinearFileDatabaseTest {
 	 */
 	@Test
 	public void multiStoreTest() {
-		LinearFileDatabase db = new LinearFileDatabase(true);
+		boolean testing = true;
+		
+		/* Testing with mock classes */
+		LinearFileDatabase db = new LinearFileDatabase(testing);
+		
+		/* Testing with actual classes */
+		//LinearFileDatabase db = new LinearFileDatabase();
+		
 		String fieldKey = "myKey";
 		String fieldValue = "myValue";
 		
@@ -83,7 +97,18 @@ public class LinearFileDatabaseTest {
 	/* Test accessing identifiers that don't exist */
 	@Test
 	public void testNullFetch() {
+		boolean testing = true;
 		
+		/* Testing with mock classes */
+		LinearFileDatabase db = new LinearFileDatabase(testing);
+		
+		/* Testing with actual classes */
+		//LinearFileDatabase db = new LinearFileDatabase();
+		
+		byte [] myKey = null;
+		Node newNode = db.fetch(myKey);
+		
+		assertEquals(newNode, null);
 	}
 	
 	

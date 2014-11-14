@@ -34,6 +34,10 @@ public class LinearFileDatabase implements Database {
 	@Override
 	public Node fetch(byte[] key) {
 		// TODO Auto-generated method stub
+		if (key == null) {
+			return null;
+		}
+			
 		ArrayList<Object> identifiers = null;
 		
 		/* 
