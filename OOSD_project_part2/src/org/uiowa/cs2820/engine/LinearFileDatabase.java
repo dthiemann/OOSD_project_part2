@@ -20,10 +20,24 @@ public class LinearFileDatabase implements Database {
 		this.f_storage = new FieldStorage();
 		this.id_storage = new IdStorage();
 	}
+	
+	public LinearFileDatabase(boolean isTest) {
+		if (isTest) {
+			this.f_storage = new MockFieldStorage();
+			this.id_storage = new MockIdStorage();
+		} else {
+			this.f_storage = new FieldStorage();
+			this.id_storage = new IdStorage();
+		}
+	}
 
 	@Override
 	public Node fetch(byte[] key) {
 		// TODO Auto-generated method stub
+		if (key == null) {
+			return null;
+		}
+			
 		ArrayList<Object> identifiers = null;
 		
 		/* 

@@ -18,10 +18,15 @@ public class Checkpoint {
 	private final static File file2 = new File("b.txt");
 
 	// (in 'a.txt') saves object as byte array
+<<<<<<< HEAD
 	public static void save(Object O, String param) throws Exception {
 		File temp = getFile(param);
 		checkFile(temp);
 		byte[] data = new byte[(int) temp.length()];
+=======
+	public static void save(Object O) {
+		byte[] data = new byte[(int) file.length()];
+>>>>>>> FETCH_HEAD
 		data = Utility.convert(O);
 		try {
 			FileOutputStream out = new FileOutputStream(temp);
@@ -38,7 +43,12 @@ public class Checkpoint {
 		FileInputStream fs = new FileInputStream(temp);
 		byte[] b = new byte[(int) temp.length()];
 		fs.read(b);
+<<<<<<< HEAD
 		BitSet O = (BitSet) Utility.revert(b);
+=======
+		Object O = new Object();
+		O = Utility.revert(b);
+>>>>>>> FETCH_HEAD
 		fs.close();
 		return O;
 	}

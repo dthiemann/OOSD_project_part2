@@ -1,7 +1,6 @@
 package org.uiowa.cs2820.engine;
 
 import static org.junit.Assert.*;
-import java.util.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,7 +23,14 @@ public class LinearFileDatabaseTest {
 	 */
 	@Test
 	public void fetchTest() {
-		LinearFileDatabase db = new LinearFileDatabase();
+		boolean testing = true;
+		
+		/* Testing with mock classes */
+		LinearFileDatabase db = new LinearFileDatabase(testing);
+		
+		/* Testing with actual classes */
+		//LinearFileDatabase db = new LinearFileDatabase();
+		 
 		String fieldKey = "myKey";
 		String fieldValue = "myValue";
 		
@@ -39,15 +45,23 @@ public class LinearFileDatabaseTest {
 		
 		Node newNode = db.fetch(byteArray);
 		
-		assertEquals(origNode, newNode);
+		assert(origNode.equals(newNode));
 	}
 	
 	/*
 	 * Tests storing multiple identifiers
 	 * for one field
 	 */
-	@Test void multiStoreTest() {
-		LinearFileDatabase db = new LinearFileDatabase();
+	@Test
+	public void multiStoreTest() {
+		boolean testing = true;
+		
+		/* Testing with mock classes */
+		LinearFileDatabase db = new LinearFileDatabase(testing);
+		
+		/* Testing with actual classes */
+		//LinearFileDatabase db = new LinearFileDatabase();
+		
 		String fieldKey = "myKey";
 		String fieldValue = "myValue";
 		
@@ -77,10 +91,25 @@ public class LinearFileDatabaseTest {
 		/* Get our node back using db.fetch */
 		Node newNode = db.fetch(byteField);
 		
-		assertEquals(orig, newNode);
+		assert(orig.equals(newNode));
 	}
 	
-	
+	/* Test accessing identifiers that don't exist */
+	@Test
+	public void testNullFetch() {
+		boolean testing = true;
+		
+		/* Testing with mock classes */
+		LinearFileDatabase db = new LinearFileDatabase(testing);
+		
+		/* Testing with actual classes */
+		//LinearFileDatabase db = new LinearFileDatabase();
+		
+		byte [] myKey = null;
+		Node newNode = db.fetch(myKey);
+		
+		assertEquals(newNode, null);
+	}
 	
 	
 }
