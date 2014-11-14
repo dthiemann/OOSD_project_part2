@@ -24,18 +24,20 @@ public class MockFieldStorage {
 	}
 
 	public byte[] get( int index ) throws IOException {
-		return null;
+		return integerHash.get(index);
 	}
 	
 	public int getPointer( byte[] f ) throws IOException {
-		return 0;
+		return keyHash.get(f);
 	}
 	
 	public int getIndex( byte[] f ) throws IOException {
-		return 0;
+		return keyHash.get(f);
 	}
 	
 	public void put( byte[] f ) throws IOException {
-		
+		keyHash.put(f, this.currentNum);
+		integerHash.put(this.currentNum, f);
+		this.currentNum++;
 	}
 }
