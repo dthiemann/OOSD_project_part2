@@ -1,14 +1,5 @@
 package org.uiowa.cs2820.engine;
 
-/*
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-*/
-
 import java.io.Serializable;
 
 public class Field implements Serializable {
@@ -40,4 +31,10 @@ public class Field implements Serializable {
 	  //System.arraycopy(FieldValue,0,R,ByteFieldName.length,FieldValue.length);
 	  //return R;
 	  }
+	
+	public boolean equals(Field f){
+		boolean keyMatch = ( this.FieldName.equals(f.getFieldName() ) );
+		boolean valueMatch = ( this.FieldValue.equals(f.getFieldValue() ) );
+		return (keyMatch && valueMatch);
 	}
+}

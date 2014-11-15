@@ -56,30 +56,13 @@ public class Checkpoint {
 	private static void checkFile(File f) throws Exception{
 		if (!f.exists()){
 			f.createNewFile();
-			FileInputStream fs = new FileInputStream(f);
-			byte[] b = new byte[(int) f.length()];
-			fs.read(b);
 			BitSet O = new BitSet();
-			O = (BitSet) Utility.revert(b);
-			O.clear(0);
-			byte[] b1 = new byte[(int) O.length()];
-			b1 = Utility.convert(O);
+			O.set(0);
+			byte[] b = new byte[(int) O.length()];
+			b = Utility.convert(O);
 			FileOutputStream out = new FileOutputStream(f);
-			out.write(b1);
+			out.write(b);
 			out.close();
-			fs.close();
 			}
 	}
 }	
-	/*
-	public static void main(String[] args) {
-		try {
-			file = new File("a.txt");
-			
-			if (!file.exists()) {
-				file.createNewFile();
-			}
-		} catch (Exception e) {
-
-		}
-	}*/

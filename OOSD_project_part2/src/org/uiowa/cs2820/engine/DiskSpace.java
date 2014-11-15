@@ -1,5 +1,6 @@
 package org.uiowa.cs2820.engine;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 //Written by Jason Sherman
@@ -16,6 +17,10 @@ public class DiskSpace {
     }
   
 	public static byte[] ReadArea(int area, String FileName) throws IOException {
+		File tempfile = new File(FileName);
+		if( !tempfile.exists() ){
+			tempfile.createNewFile();
+		}
 		area = area*1024;
 		RandomAccessFile file = new RandomAccessFile(FileName, "r");
 		file.seek(area);

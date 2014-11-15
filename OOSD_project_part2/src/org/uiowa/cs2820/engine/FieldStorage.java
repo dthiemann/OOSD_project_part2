@@ -1,6 +1,10 @@
 package org.uiowa.cs2820.engine;
 
-import java.io.IOException;
+import org.uiowa.cs2820.engine.Allocation;
+import org.uiowa.cs2820.engine.DiskSpace;
+import org.uiowa.cs2820.engine.Field;
+import org.uiowa.cs2820.engine.Kblock;
+import org.uiowa.cs2820.engine.Utility;
 
 /**
  * Joe Maule
@@ -18,38 +22,38 @@ public class FieldStorage {
 	private final String FILETYPE = "FIELD";
 	
 	// Gets the Field at a given index from the file; returns as a byte array
-	public byte[] get( int index ) throws IOException {
+	public byte[] get( int index ) throws Exception {
 		Kblock kb = new Kblock( DiskSpace.ReadArea( index, FILETYPE ) );
 		return kb.getData();
 	}
 	
 	// Gets the pointer (starting index) for the Identifiers of a given Field
-	public int getPointer( byte[] f ) throws IOException {
+	public int getPointer( byte[] f ) throws Exception {
 		return findField( f, "POINTER" );
 	}
 	
 	// Get the index of a given Field in its file
-	public int getIndex( byte[] f ) throws IOException {
+	public int getIndex( byte[] f ) throws Exception {
 		return findField( f, "INDEX" );
 	}
 		
 	// Save a Field to the file, unless Field already exists
-	public void put( byte[] f ) throws IOException {
+	public void put( byte[] f ) throws Exception {
 		// Find Field in file
 		int fIndex = this.getIndex( f );
 		if( fIndex == -1 ){
 			// Get index of free block from Field bit array
 			int index = Allocation.allocate(FILETYPE);
 			// Get index of free block from Identifier bit array (for ID pointer)
-			int pointer = Allocation.getID();
+			int pointer = Allocation.fs();
 			// Create 1kb block and write to file
-			Kblock kb = new Kblock( index, f );
+			Kblock kb = new Kblock( pointer, f );
 			DiskSpace.WriteArea( index, kb.getBlock(), FILETYPE );
 		}
 	}
 	
 	// Search for a given Field and return the data requested
-	private int findField( byte[] f, String intType ) throws IOException {
+	private int findField( byte[] f, String intType ) throws Exception {
 		// Iterate through the Field file to locate the given Field
 		Field paramField = (Field) Utility.revert( f );
 		int allocSize = Allocation.size();

@@ -1,5 +1,52 @@
 Joe Maule ChangeLog
 
+Update (11/14):
++ Created an Integration Test
+	- Initial tests verified through LinearFileDatabaseTest
+		using the actual classes, switching the initialization of the variable 'db'
+	- FieldTest was not accurate enough for a comprehensive Integration Test
+
++ Made the following changes to ensure the program works correctly:
+	*** I had to locally comment out the @Override commands from LinearFileDatabase
+	***	and the Identifiers.sort() commands from Node in order to run the program.
+	***	[This is most likely due to using a different version of Java].
+	***	These commands have not been changed in the GitHub copy of the Project.
+		
+	- Allocation:
+		:: removed class variable 'bs' - as Allocation is static, any class variables would
+			also have to be static; this interferes with the class methods()
+		:: modified all references to 'bs' to create local BitSet variables (see above)
+		:: made size() static to match the rest of the class
+		:: deleted the main() method that was commented out (to clean up code)
+	- Checkpoint:
+		:: modified checkFile() to not read from the newly created file
+			- it returns a 'null' value which causes an error when trying to set the first bit
+		:: deleted the main() method that was commented out (to clean up code)
+	- DiskSpace:
+		:: modified ReadArea() to create a new file if it does not already exist
+			- this was necessary for when first writing to the ID file
+			  (for the IdStorage class' get() method)
+	- Field:
+		:: created an equals() method for correctly comparing Fields to one another
+			- necessary for FieldStorage class
+	- FieldStorage:
+		:: modified methods to throw a generic Exception (instead of an IOException)
+			- this is to accept Exceptions from both DiskSpace and Allocation classes
+		:: fixed a couple logic typos in put() : incorrect method name, passing the wrong argument
+	- IdStorage:
+		:: modified methods to throw a generic Exception (instead of an IOException)
+			- this is to accept Exceptions from both DiskSpace and Allocation classes
+		:: added test to put() method to check for a 'null' ArrayList of Identifiers
+			(this occurs when a Field does not already exist in the database)
+		:: fixed put() method call to DiskSpace.WriteArea() to pass the correct byte array
+		:: fixed freePointers() to pass String parameter to Allocation.free()
+
+		
+====================================
+====================================
+====================================
+
+
 Update (11/12) v2.0 :
 + Fixed comments for all of my classes (FieldStorage, IdStorage, Kblock, and Utility)
 

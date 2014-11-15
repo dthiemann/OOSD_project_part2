@@ -1,6 +1,5 @@
 package org.uiowa.cs2820.engine;
 
-import java.io.IOException;
 import java.util.ArrayList;;
 
 /**
@@ -20,7 +19,7 @@ public class IdStorage {
 	
 	// Get the list of Identifiers for a given Field
 	@SuppressWarnings("unchecked")
-	public ArrayList<Object> get( int index ) throws IOException {
+	public ArrayList<Object> get( int index ) throws Exception {
 		// Read the first 1kb of data from file
 		Kblock kb = new Kblock( DiskSpace.ReadArea( index, FILETYPE ) );
 		byte[] id = kb.getData();
@@ -42,10 +41,13 @@ public class IdStorage {
 	}
 	
 	// Save an Identifier to the file, unless it already exists
-	public void put( int startIndex, Object id ) throws IOException {
+	public void put( int startIndex, Object id ) throws Exception {
 		// Add new Identifier to list
 		ArrayList<Object> idList = this.get( startIndex );
-		if( idList.contains( id ) ){
+		if( idList == null ){
+			idList = new ArrayList<Object>();
+		}
+		if( idList.contains( id )  ){
 			return;
 		}
 		idList.add( id );
@@ -72,10 +74,11 @@ public class IdStorage {
 			else{
 				pointer = 0;
 			}
-			Kblock kb = new Kblock( pointer, kbData );
 			
+			Kblock kb = new Kblock( pointer, kbData );
+
 			// Write block of data to file
-			DiskSpace.WriteArea( index, kbData, FILETYPE );
+			DiskSpace.WriteArea( index, kb.getBlock(), FILETYPE );
 			// Adjust index of data array to point to next set of data
 			start += size;
 			index = pointer;
@@ -85,10 +88,10 @@ public class IdStorage {
 	
 	// Get all pointers for Identifier blocks of data,
 	// and mark their locations in file as "empty" for rewriting new data
-	private void freePointers( int index ) throws IOException {
+	private void freePointers( int index ) throws Exception {
 		int pointer = index;
 		do{
-			Allocation.free( pointer );
+			Allocation.free( pointer, FILETYPE );
 			Kblock kb = new Kblock( DiskSpace.ReadArea( pointer, FILETYPE ) );
 			pointer = kb.getPointer();
 		} while( pointer != 0 );
